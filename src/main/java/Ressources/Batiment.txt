@@ -1,0 +1,16 @@
+Coin;1;50.0;50.0;
+Coin;2;250.0;50.0;
+Coin;3;250.0;250.0;
+Coin;4;50.0;250.0;
+Mur;1;1;2;1;
+Mur;2;2;3;1;
+Mur;3;3;4;1;
+Mur;4;4;1;1;
+Sol;0;1;2;3;4;2;
+Plafond;0;1;2;3;4;1;
+Piece;1;0;0;1;2;3;4;
+Appartement;0;0;1;
+Appartement;1;0;
+Appartement;2;0;
+Niveau;0;2.3;0;1;2;
+batiment;fef;0;
