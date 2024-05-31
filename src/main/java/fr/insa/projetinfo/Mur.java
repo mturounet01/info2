@@ -12,55 +12,79 @@ import java.lang.Math;
  *
  * @author antoinez
  */
+import java.io.IOException;
+import java.io.Writer;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class Mur {
-    int idMur;       //privé par défaut (on peut pas les utliser en dehors de cette classe)
-    Coin debut;
-    Coin fin;
-    int IdRev;
+    private int idMur;
+    private Coin debut;
+    private Coin fin;
+    private int idRev;
+    private ArrayList<Revetement> revetements;
 
     public Mur(int idMur, Coin debut, Coin fin) {
         this.idMur = idMur;
         this.debut = debut;
         this.fin = fin;
+        revetements = new ArrayList<>();
     }
     
     public double longueur(){
-       return Math.sqrt(Math.pow(debut.getX()-fin.getX(), 2) + Math.pow(debut.getY()-fin.getY(),2))/100;
-       
+        return Math.sqrt(Math.pow(debut.getX()-fin.getX(), 2) + Math.pow(debut.getY()-fin.getY(),2))/100;
     }
 
     public double surface(double h){
-        return h*this.longueur(); 
+        return h * this.longueur(); 
     }
     
-    public Coin getdebut (){
-    return this.debut;
-    
+    public Coin getDebut (){
+        return this.debut;
     }
     
-    public Coin getfin (){
-    return this.fin;
+    public Coin getFin (){
+        return this.fin;
     }
     
     public int getIdMur (){
-    return this.idMur;
-    }
-    public int getRev() {
-    return this.IdRev;
+        return this.idMur;
     }
     
+    public int getRev() {
+        return this.idRev;
+    }
+    
+    public void addRev(int rev) {
+        this.idRev = rev;
+    }
+
+    public ArrayList<Revetement> getRevetements() {
+        return revetements;
+    }
+
+    public void addRevetement(Revetement revetement) {
+        revetements.add(revetement);
+    }
     
     public int Revet(){
-        System.out.println("Veuillez choisir le revetements associé à ce mur");
-        //Cette partie va être a modifer lors du passage en JavaFX
-        int a=Lire.i();
+        System.out.println("Veuillez choisir le revetement associé à ce mur :");
+        // Cette partie va être à modifier lors du passage en JavaFX
+        int a = Lire.i(); // Je suppose que Lire.i() lit un entier depuis l'entrée standard
         return a;
     }
-    public void save (Writer w) throws IOException {
-        w.append("Mur;"+idMur+";"+this.debut.getIdCoin()+";"+this.fin.getIdCoin()+";"+this.IdRev+";"+ "\n");
-    }
-    public void AddRev(int rev){
-    this.IdRev=rev;
-    }}
-
     
+    public void save (Writer w) throws IOException {
+        w.append("Mur;" + idMur + ";" + this.debut.getIdCoin() + ";" + this.fin.getIdCoin() + ";" + this.idRev + ";\n");
+    }
+    
+    public int getIdCoinDebut() {
+        return this.debut.getIdCoin();
+    }
+    
+    public int getIdCoinFin() {
+        return this.fin.getIdCoin();
+    }
+}

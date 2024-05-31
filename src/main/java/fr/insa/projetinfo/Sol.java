@@ -10,36 +10,68 @@ import java.util.ArrayList;
 
 /**s
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.Writer;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class Sol {
-    public int idSol;
-    public ArrayList<Mur> Mur;
-    public ArrayList<Coin> Coin;
-    private int Rev;
-    
-    public Sol(int idSol,ArrayList<Mur> Mur , ArrayList<Coin> Coin){
-        this.idSol=idSol;
-        this.Mur=Mur;
-        this.Coin=Coin;
+    private int idSol;
+    private ArrayList<Mur> murs;
+    private ArrayList<Coin> coins;
+    private int rev;
+    private ArrayList<Revetement> revetements;
+
+    public Sol(int idSol, ArrayList<Mur> murs, ArrayList<Coin> coins){
+        this.idSol = idSol;
+        this.murs = murs;
+        this.coins = coins;
+        revetements = new ArrayList<>();
     }
-    
-    public double surface (){
-        Mur M1 = Mur.get(0);
-        Mur M2 = Mur.get(1);
-        return M1.longueur()*M2.longueur();
+
+    public double surface() {
+        Mur mur1 = murs.get(0);
+        Mur mur2 = murs.get(1);
+        return mur1.longueur() * mur2.longueur();
     }
-    public int getIdSol(){
-    return this.idSol;
+
+    public int getIdSol() {
+        return idSol;
     }
-    public void AddRev (int i){
-     this.Rev=i;   
+
+    public void addRev(int rev) {
+        this.rev = rev;   
     }
-    public int Rev (){
-       return Rev;
+
+    public int getRev() {
+        return rev;
     }
-    
-    public void save (Writer w) throws IOException {
-        w.append("Sol;"+idSol+";"+this.Coin.get(0).getIdCoin()+";"+this.Coin.get(1).getIdCoin()+";"+this.Coin.get(2).getIdCoin()+";"+this.Coin.get(3).getIdCoin()+";"+this.Rev+";"+ "\n");
+
+    public void addRevetement(Revetement revetement) {
+        revetements.add(revetement);
+    }
+
+    public ArrayList<Revetement> getRevetements() {
+        return revetements;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return coins;
+    }
+
+    public void save(Writer w) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Sol;");
+        sb.append(idSol).append(";");
+        for (Coin coin : coins) {
+            sb.append(coin.getIdCoin()).append(";");
+        }
+        sb.append(rev).append(";\n");
+        w.append(sb.toString());
     }
 }

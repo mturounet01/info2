@@ -10,42 +10,67 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.Writer;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class Plafond {
-    public int  idPlafond;
-    public ArrayList<Mur> Mur;
-    public ArrayList<Coin> Coin;
-    private int Rev;
-    
-    public Plafond(int idPlafond, ArrayList<Mur> Mur ,ArrayList<Coin> Coin ){
-        this.idPlafond=idPlafond;
-        this.Mur=Mur;
-        this.Coin=Coin;
-         }
-    
+    private int idPlafond;
+    private ArrayList<Mur> murs;
+    private ArrayList<Coin> coins;
+    private int rev;
+    private ArrayList<Revetement> revetements;
+
+    public Plafond(int idPlafond, ArrayList<Mur> murs, ArrayList<Coin> coins){
+        this.idPlafond = idPlafond;
+        this.murs = murs;
+        this.coins = coins;
+        revetements = new ArrayList<>();
+    }
+
     public double surface(){
-        Mur M1 = Mur.get(0);
-        Mur M2 = Mur.get(1);
-        return M1.longueur()*M2.longueur();
-        
+        Mur mur1 = murs.get(0);
+        Mur mur2 = murs.get(1);
+        return mur1.longueur() * mur2.longueur();
     }
-    public int Revet(){
-        System.out.println("Veuillez choisir le revetements associé à ce plafond");
-        
-        int a=Lire.i();
-        return a;
-     }
-     public int getIdPlafond(){
-    return this.idPlafond;
+
+    public int getIdPlafond(){
+        return idPlafond;
     }
+
+    public void addRev(int rev) {
+        this.rev = rev;   
+    }
+
     public int getRev() {
-        return Rev;
+        return rev;
     }
-     public void AddRev (int i){
-     this.Rev=i;   
+
+    public void addRevetement(Revetement revetement) {
+        revetements.add(revetement);
     }
-    public void save (Writer w) throws IOException {
-        w.append("Plafond;"+idPlafond+";"+this.Coin.get(0).getIdCoin()+";"+this.Coin.get(1).getIdCoin()+";"+this.Coin.get(2).getIdCoin()+";"+this.Coin.get(3).getIdCoin()+";"+this.Rev+";"+ "\n");
+
+    public ArrayList<Revetement> getRevetements() {
+        return revetements;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return coins;
+    }
+
+    public void save(Writer w) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Plafond;").append(idPlafond).append(";");
+        for (Coin coin : coins) {
+            sb.append(coin.getIdCoin()).append(";");
+        }
+        sb.append(rev).append(";\n");
+        w.append(sb.toString());
     }
 }

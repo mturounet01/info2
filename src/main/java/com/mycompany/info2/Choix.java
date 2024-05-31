@@ -58,11 +58,11 @@ public class Choix extends VBox {
         boutonvalide.setPrefWidth(120);
 
         // Configuration de la ComboBox pour le choix du nombre de niveaux
-        niveauxComboBox.getItems().addAll(1, 2, 3, 4); // Exemple : 4 niveaux possibles
+        niveauxComboBox.getItems().addAll(1, 2, 3, 4); 
         niveauxComboBox.setPromptText("Sélectionnez le nombre de niveaux");
         
         //Configuration de la ComboBox pour le choix du nombre d'appartement par niveau
-        appartComboBox.getItems().addAll(1, 2, 3, 4); // Exemple : 4 appart possibles
+        appartComboBox.getItems().addAll(1, 2, 3, 4); 
         appartComboBox.setPromptText("Sélectionnez le nombre d'appartements");
         
         // Création du conteneur principal et configuration de la mise en page

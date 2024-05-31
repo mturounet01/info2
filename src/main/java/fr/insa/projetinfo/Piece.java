@@ -7,11 +7,13 @@ package fr.insa.projetinfo;
 import java.lang.Math;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.concurrent.atomic.AtomicInteger;
 /**
  *
  * @author Justin PRADIE
  */
 public class Piece {
+    private static final AtomicInteger idCounter = new AtomicInteger(0);
     public int idPiece;
     ArrayList<Mur> Mur = new ArrayList();
     ArrayList<Coin> Coin = new ArrayList(); 
@@ -19,7 +21,7 @@ public class Piece {
     public Plafond plafond = new Plafond(idPiece,Mur,Coin);
     
     public Piece(int idPiece) {
-        this.idPiece = idPiece;  
+       this.idPiece = idCounter.incrementAndGet();
     }
     
     public void addCoin(Coin Coin){
@@ -46,10 +48,11 @@ public class Piece {
     public void save (Writer w) throws IOException {
     w.append("Piece;"+idPiece+";"+this.sol.getIdSol()+";"+this.plafond.getIdPlafond()+";"+this.Mur.get(0).getIdMur()+";"+this.Mur.get(1).getIdMur()+";"+this.Mur.get(2).getIdMur()+";"+this.Mur.get(3).getIdMur()+";"+ "\n");
     }
-    public Sol Getsol (){
+    public Sol getsol (){
     return this.sol;
     }
-    public Plafond GetPlafond(){
+    public Plafond getPlafond(){
     return this.plafond;
     }
+    
 }

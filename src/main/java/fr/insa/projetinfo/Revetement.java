@@ -17,7 +17,7 @@ public class Revetement {
     private boolean sol;
     private boolean plafond;
     private double prix;
-
+    private String type;
     public Revetement(int id, String nom, boolean mur, boolean sol, boolean plafond, double prix) {
         this.id = id;
         this.nom = nom;
@@ -25,6 +25,7 @@ public class Revetement {
         this.sol = sol;
         this.plafond = plafond;
         this.prix = prix;
+        this.type= type;
     }
 
     public static ArrayList<Revetement> chargerRevetements(String fichierRevetements) throws IOException {
@@ -45,7 +46,12 @@ public class Revetement {
         reader.close();
         return revetements;
     }
-
+    public int getId() {
+        return id;
+    }
+    public String getType() {
+        return type;
+    }
     public double getPrix() {
         return prix;
     }

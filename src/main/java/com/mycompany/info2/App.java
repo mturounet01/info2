@@ -23,7 +23,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Accueil accueil = new Accueil();
+        Accueil accueil = new Accueil(primaryStage);
 
         Scene scene = new Scene(accueil, 800, 200);
         primaryStage.setTitle("Principal");
@@ -31,7 +31,7 @@ public class App extends Application {
         primaryStage.show();
 
         accueil.getCreateProjectButton().setOnAction(event -> showChoix(primaryStage));
-        accueil.getopenProjectButton().setOnAction(event -> {
+        accueil.getOpenProjectButton().setOnAction(event -> {
             int a = 2;
             Lecture lect = new Lecture();
             double b = lect.recupprix(a);
@@ -59,7 +59,7 @@ public class App extends Application {
 
         choix.getboutonvalide().setOnAction(event -> {
             Batiment batiment = new Batiment();
-            batiment.addName(choix.getTitre());
+            batiment.getNomBat(choix.getTitre());
 
             boolean immeubleSelected = choix.ImmeubleCheckBox.isSelected();
             boolean maisonSelected = choix.maisonCheckBox.isSelected();
@@ -94,49 +94,58 @@ public class App extends Application {
     }
 
     public void save(Batiment bat) {
+        
     try (BufferedWriter w = new BufferedWriter(new FileWriter("sauvegarde.txt"))) {
-        // Parcourir les niveaux du batiment
         for (Niveau niveau : bat.getNiveau()) {
-            // Obtenir le nombre d'appartements pour ce niveau
-            int nbAppartements = niveau.getAppart().size();
-            // Écrire le nombre d'appartements dans le fichier
-            w.write("Niveau " + niveau.getIdNiveau() + ": " + nbAppartements + " appartements");
+            w.write("Niveau;" + niveau.getIdNiveau() + ";" + niveau.getHauteurSousPlafond() + ";");
             w.newLine();
-            
-            // Parcourir les appartements du niveau
+
             for (Appartement appartement : niveau.getAppart()) {
-                // Obtenir le nombre de pièces pour cet appartement
-                int nbPieces = appartement.getPieces().size();
-                // Écrire le nombre de pièces dans le fichier
-                w.write("- Appartement " + appartement.getIdAppartement() + ": " + nbPieces + " pièces");
+                w.write("Appartement;" + appartement.getIdAppartement() + ";" + niveau.getIdNiveau() + ";");
                 w.newLine();
-                
-                // Parcourir les pièces de l'appartement
+
                 for (Piece piece : appartement.getPieces()) {
-                    // Obtenir les revêtements de la pièce
-                    Sol sol = piece.Getsol();
-                    Plafond plafond = piece.GetPlafond();
+                    Sol sol = piece.getsol();
+                    Plafond plafond = piece.getPlafond();
                     ArrayList<Mur> murs = piece.getMur();
-                    
+
+                    w.write("Piece;" + appartement.getIdAppartement() + ";" + piece.getIdPiece() + ";" + sol.getIdSol() + ";" + plafond.getIdPlafond() + ";");
+                    w.newLine();
+
                     // Écrire les informations sur les revêtements dans le fichier
-                    w.write("  - Pièce " + piece.getIdPiece() + ":");
+                    w.write("Sol;" + sol.getIdSol() + ";");
+                    for (Coin coin : sol.getCoins()) {
+                        w.write(coin.getIdCoin() + ";");
+                    }
+                    for (Revetement revetement : sol.getRevetements()) {
+                        w.write(revetement.getId() + ";");
+                    }
                     w.newLine();
-                    w.write("    - Revêtement du sol: " + sol.Rev());
+
+                    w.write("Plafond;" + plafond.getIdPlafond() + ";");
+                    for (Coin coin : plafond.getCoins()) {
+                        w.write(coin.getIdCoin() + ";");
+                    }
+                    for (Revetement revetement : plafond.getRevetements()) {
+                        w.write(revetement.getId() + ";");
+                    }
                     w.newLine();
-                    w.write("    - Revêtement du plafond: " + plafond.getRev());
-                    w.newLine();
-                    w.write("    - Revêtements des murs:");
-                    w.newLine();
-                    
+
                     // Parcourir les murs de la pièce
                     for (Mur mur : murs) {
-                        w.write("      - Mur " + mur.getIdMur() + ": " + mur.getRev());
+                        w.write("Mur;" + mur.getIdMur() + ";" + mur.getIdCoinDebut() + ";" + mur.getIdCoinFin() );
+                        for (Revetement revetement : mur.getRevetements()) {
+                            w.write(revetement.getId() + ";");
+                        }
                         w.newLine();
                     }
                 }
             }
         }
-    } catch (IOException ex) {
+        w.close();
+    }
+
+     catch (IOException ex) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText("Problème durant la sauvegarde");

@@ -12,42 +12,45 @@ import java.util.ArrayList;
  *
  * @author antoinez
  */
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class Niveau {
     public int idNiveau;
-    private double h ;
-     ArrayList<Appartement> Appartement = new ArrayList();
-    
-    public Niveau(int idNiveau,double hauteur){
+    private double hauteurSousPlafond;
+    ArrayList<Appartement> appartements = new ArrayList();
+
+    public Niveau(int idNiveau, double hauteur) {
         this.idNiveau = idNiveau;
-        this.h=hauteur;
+        this.hauteurSousPlafond = hauteur;
     }
-   
-    public void addAppartement(Appartement appart){
-        this.Appartement.add(appart);
+
+    public void addAppartement(Appartement appart) {
+        this.appartements.add(appart);
     }
-   public void addh (double h ){
-     this.h=h;
-   }
-   public int getIdNiveau (){
-    return this.idNiveau;
-   }
-   public ArrayList<Appartement> getAppart(){
-   return this.Appartement;
-   }
-   
-    public void save (Writer w) throws IOException {
-        h=2.30;
-        w.append("Niveau;"+idNiveau+";"+h+";");
-        for (Appartement appartement : Appartement){
-             w.append(appartement.getIdAppartement()+";");
+
+    public int getIdNiveau() {
+        return this.idNiveau;
+    }
+
+    public ArrayList<Appartement> getAppart() {
+        return this.appartements;
+    }
+
+    public double getHauteurSousPlafond() {
+        return this.hauteurSousPlafond;
+    }
+
+    public void save(Writer w) throws IOException {
+        w.append("Niveau;" + idNiveau + ";" + hauteurSousPlafond + ";");
+        for (Appartement appartement : appartements) {
+            w.append(appartement.getIdAppartement() + ";");
         }
-        w.append(""+"\n");
+        w.append("\n");
     }
-    public double geth (){
-        return h;
+
+    public void addHauteurSousPlafond(double hauteur) {
+        this.hauteurSousPlafond = hauteur;
     }
-    public void addH (double h ){
-    this.h=h;
-    }
-    
 }

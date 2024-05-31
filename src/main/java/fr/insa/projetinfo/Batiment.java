@@ -14,39 +14,40 @@ import javafx.scene.control.Alert;
  *
  * @author Justin PRADIE
  */
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class Batiment {
     private String nomBat;
-    public ArrayList<Niveau> niveaux=new ArrayList();
-    
-    
-    public void addName (String name) {
-        this.nomBat=name;
+    private ArrayList<Niveau> niveaux;
+
+    public Batiment() {
+        niveaux = new ArrayList<>();
+    }
+
+    public String getNomBat(String nomBat) {
+        return nomBat;
+    }
+
+    public void setNomBat(String nomBat) {
+        this.nomBat = nomBat;
+    }
+
+    public ArrayList<Niveau> getNiveau() {
+        return niveaux;
+    }
+
+    public void addNiveau(Niveau niveau) {
+        niveaux.add(niveau);
     }
     
-    public void addNiveau (Niveau niveau){
-        this.niveaux.add(niveau);
-    }     
-    
-   
-    
-    public double surfaceRevetements(int idRevetement){
-       //A faire
-       return 0;
-    }
-    public double devisRevetement (int idRevetement){
-        //a faire    
-    return 0;
-    }
-    public  ArrayList<Niveau> getNiveau (){
-        return this.niveaux;
-    }
-    
-     public void save (Writer w) throws IOException {
-        w.append("batiment;"+nomBat+";");
-        for (Niveau Niveau : niveaux){
-             w.append(Niveau.getIdNiveau()+";");
+
+    public void save(Writer w) throws IOException {
+        w.append("batiment;" + nomBat + ";");
+        for (Niveau niveau : niveaux) {
+            w.append(niveau.getIdNiveau() + ";");
         }
-        w.append(""+"\n");
+        w.append("\n");
     }
-    
-}
+    }

@@ -20,45 +20,47 @@ import javafx.stage.Stage;
  *
  * @author maxt
  */
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 public class Accueil extends VBox {
-    
+
     private Button createProjectButton;
     private Button openProjectButton;
-    
-    public Accueil (){
-        
+
+    public Accueil(Stage primaryStage) {
+
         Text titleText = new Text("DeviBat");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        
+
         Text descriptionText = new Text("Faire le devis de votre bâtiment");
         descriptionText.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
-        
-        Button createProjectButton = new Button("Créer projet");
-        this .createProjectButton = createProjectButton;
+
+        createProjectButton = new Button("Créer projet");
         createProjectButton.setPrefWidth(120);
-        
-         Button openProjectButton = new Button("Ouvrir un projet");
-         this.openProjectButton = openProjectButton;
+
+        openProjectButton = new Button("Ouvrir un projet");
         openProjectButton.setPrefWidth(120);
-       
-     
-       setSpacing(20);
-       setAlignment(Pos.CENTER);
-       getChildren().addAll(titleText, descriptionText, createProjectButton, openProjectButton);
-      
-       
+        openProjectButton.setOnAction(event -> {
+            OuvrirProjet ouvrirProjet = new OuvrirProjet();
+            ouvrirProjet.ouvrir(primaryStage);
+        });
+
+        setSpacing(20);
+        setAlignment(Pos.CENTER);
+        getChildren().addAll(titleText, descriptionText, createProjectButton, openProjectButton);
     }
 
-    
-public Button getCreateProjectButton() {
+    public Button getCreateProjectButton() {
         return createProjectButton;
     }
-public Button getopenProjectButton() {
+
+    public Button getOpenProjectButton() {
         return openProjectButton;
     }
 }
-
-       
-      
-      
-

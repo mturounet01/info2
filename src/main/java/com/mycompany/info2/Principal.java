@@ -5,150 +5,206 @@
 package com.mycompany.info2;
 
 import fr.insa.projetinfo.*;
-import java.util.ArrayList;
-import javafx.scene.layout.VBox;
-import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Principal extends BorderPane {
-    
-    private Button AddPiece;
-    private Button save;
-    private Button Devis;
-    private Button Revet;
-    private Button Actualiser;
-    private Button Appartsuiv;
-    private Button Appartprec;
-    private Button Niveausuiv;
-    private Button Niveauprec;
-    private Button suppr; // Bouton pour supprimer la dernière pièce
-    public Canvas canvas;
-    private TextField hauteur;
-    private Button valide;
-    private Niveau niveau;
-    private ArrayList<Appartement> Appartement;
-    private Appartement appart;
-    private ArrayList<Piece> pieces;
-    private ArrayList<Mur> mur;
-    private ArrayList<Niveau> niveaux;
-    private Coin Cn1;
-    private Coin Cn2;
-    private int nv=0;
-    private int a=0;
-    private int nvm;
-    private int am;
+
     private Label label;
-    private int p;
+    private Button addPieceButton, supprButton, saveButton, devisButton, revetButton, actualiserButton;
+    private Button appartsuivButton, appartprecButton, niveausuivButton, niveauprecButton, valideButton;
+    private TextField hauteurField;
+    private Canvas canvas;
+    private GraphicsContext gc;
 
-    
-    public Principal (ArrayList<Niveau> niveaux, Batiment bat) {
-        Label label = new Label("Niveau" + " " + nv + " " + "Appart" + " " + (a+1));
-        this.label = label;
-        
-        Button AddPiece = new Button("Ajouter une pièce");
-        this.AddPiece = AddPiece;
-        
-        Button save = new Button("Enregistrer");
-        this.save = save;
-        
-        Button Devis = new Button("Devis");
-        this.Devis = Devis;
-        
-        Button Revet = new Button("Revetement");
-        this.Revet = Revet;
-        
-        Button actualiser = new Button("Actualiser");
-        this.Actualiser = actualiser;
-        
-        Button Appartsuiv = new Button("Appart suivant");
-        this.Appartsuiv = Appartsuiv;
-        
-        Button Appartprec = new Button("Appart précedent");
-        this.Appartprec = Appartprec;
-        
-        Button Niveausuiv = new Button("Niveau suivant");
-        this.Niveausuiv = Niveausuiv;
-        
-        Button Niveauprec = new Button("Niveau precedent");
-        this.Niveauprec = Niveauprec;
-        
-        TextField hauteur = new TextField("Donnez hauteur");
-        this.hauteur = hauteur;
-        
-        Button valide = new Button("Valide hauteur");
-        this.valide = valide;
-        
-        Button suppr = new Button("Supprimer la dernière pièce");
-        suppr.setOnAction(event -> suppr());
-        this.suppr = suppr;
+    private ArrayList<Niveau> niveaux;
+    private Batiment bat;
+    private Niveau niveau;
+    private Appartement appart;
+    private ArrayList<Appartement> appartements;
+    private ArrayList<Piece> pieces;
+    private int nv = 0, a = 0, p, am, nvm;
 
-        Label echelle = new Label("Echelle:100p=1m");
+    public Principal(ArrayList<Niveau> niveaux, Batiment bat) {
+        this.niveaux = niveaux;
+        this.bat = bat;
 
-        VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(10));
-        vbox.getChildren().addAll(this.suppr, this.label, this.AddPiece, this.save, this.Revet, this.Devis,
-                this.Actualiser, this.Niveausuiv, this.Appartsuiv, this.Appartprec, this.Niveauprec, this.hauteur, this.valide);
-        setRight(vbox);
-        
-        Canvas canvas = new Canvas(700, 550);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        this.canvas = canvas; 
-        setCenter(canvas);
-        setBottom(echelle);
-        gc.strokeRect(0, 0, 700, 550);
-        this.niveau = niveaux.get(nv);
-            this.Appartement = niveau.getAppart();
-            this.appart = Appartement.get(a);
-            pieces = this.appart.getPieces();
-            p = pieces.size() + 1;
-        this.am = Appartement.size();
+        initializeComponents();
+        configureLayout();
+        addEventHandlers();
+        updateState();
+    }
+
+    private void initializeComponents() {
+        label = new Label();
+        addPieceButton = new Button("Ajouter une pièce");
+        supprButton = new Button("Supprimer la dernière pièce");
+        saveButton = new Button("Enregistrer");
+        devisButton = new Button("Devis");
+        revetButton = new Button("Revetement");
+        actualiserButton = new Button("Actualiser");
+        appartsuivButton = new Button("Appart suivant");
+        appartprecButton = new Button("Appart précédent");
+        niveausuivButton = new Button("Niveau suivant");
+        niveauprecButton = new Button("Niveau précédent");
+        hauteurField = new TextField("Donnez hauteur");
+        valideButton = new Button("Valide hauteur");
+
+        canvas = new Canvas(700, 550);
+        gc = canvas.getGraphicsContext2D();
+    }
+
+    private void configureLayout() {
+    VBox vbox = new VBox(10);
+    vbox.setPadding(new Insets(10));
+
+    // Ajout des boutons et autres éléments au VBox
+    vbox.getChildren().addAll(
+        label, addPieceButton, supprButton, saveButton, revetButton,
+        devisButton, actualiserButton, niveausuivButton, appartsuivButton,
+        appartprecButton, niveauprecButton, hauteurField, valideButton
+    );
+
+    // Positionnement du VBox sur le côté droit
+    setRight(vbox);
+
+    // Positionnement du canvas au centre
+    setCenter(canvas);
+
+    // Ajout d'un label en bas
+    setBottom(new Label("Echelle: 100p = 1m"));
+
+    // Dessin d'un rectangle sur le canvas pour délimiter une zone spécifique
+    gc.strokeRect(0, 0, 700, 550);
+}
+
+
+
+    private void addEventHandlers() {
+        addPieceButton.setOnAction(event -> addPiece());
+        supprButton.setOnAction(event -> suppr());
+        actualiserButton.setOnAction(event -> actualiser());
+        appartsuivButton.setOnAction(event -> nextAppart());
+        appartprecButton.setOnAction(event -> prevAppart());
+        niveausuivButton.setOnAction(event -> nextNiveau());
+        niveauprecButton.setOnAction(event -> prevNiveau());
+        revetButton.setOnAction(event -> openRevetement());
+        devisButton.setOnAction(event -> openDevis());
+        saveButton.setOnAction(event -> saveProject());
+        valideButton.setOnAction(event -> validateHeight());
+    }
+
+    private void updateState() {
+        niveau = niveaux.get(nv);
+        appartements = niveau.getAppart();
+        appart = appartements.get(a);
+        pieces = appart.getPieces();
+        p = pieces.size() + 1;
+        am = appartements.size();
         nvm = niveaux.size();
+        updateLabel();
+    }
 
-        AddPiece.setOnAction(event -> {
-            CreerPiece CreerPiece = new CreerPiece(nv, a, this.appart, p);
-        });
+    private void updateLabel() {
+        label.setText("Niveau " + nv + " Appart " + (a + 1));
+    }
 
-        Actualiser.setOnAction(event -> {
+    private void addPiece() {
+        new CreerPiece(nv, a, appart, p);
+    }
+
+    private void actualiser() {
+        gc.clearRect(1, 1, 699, 549);
+        gc.strokeRect(0, 0, 700, 550);
+        for (Piece piece : pieces) {
+            drawPiece(piece);
+        }
+    }
+
+    private void drawPiece(Piece piece) {
+        ArrayList<Coin> coins = piece.getCoin();
+        int numCoins = coins.size();
+        if (numCoins > 1) {
+            for (int i = 0; i < numCoins - 1; i++) {
+                Coin coin1 = coins.get(i);
+                Coin coin2 = coins.get(i + 1);
+                gc.strokeLine(coin1.getX(), coin1.getY(), coin2.getX(), coin2.getY());
+            }
+            Coin firstCoin = coins.get(0);
+            Coin lastCoin = coins.get(numCoins - 1);
+            gc.strokeLine(firstCoin.getX(), firstCoin.getY(), lastCoin.getX(), lastCoin.getY());
+        }
+    }
+
+    private void nextAppart() {
+        if (a < am - 1) {
+            a++;
+            updateState();
+        }
+    }
+
+    private void prevAppart() {
+        if (a > 0) {
+            a--;
+            updateState();
+        }
+    }
+
+    private void nextNiveau() {
+        if (nv < nvm - 1) {
+            nv++;
+            a = 0;
+            updateState();
+        }
+    }
+
+    private void prevNiveau() {
+        if (nv > 0) {
+            nv--;
+            a = 0;
+            updateState();
+        }
+    }
+
+    private void openRevetement() {
+        new Devisrevet(appart);
+    }
+
+    private void openDevis() {
+        new couttot(niveaux, "Ressources/Revetement.txt");
+    }
+
+    private void saveProject() {
+        App main = new App();
+        main.save(bat);
+    }
+
+    private void validateHeight() {
+        niveau.addHauteurSousPlafond(Double.parseDouble(hauteurField.getText()));
+        actualiser();
+    }
+
+    private void suppr() {
+        // Vérifier s'il y a des pièces à supprimer
+        if (!pieces.isEmpty()) {
+            // Supprimer la dernière pièce de la liste
+            pieces.remove(pieces.size() - 1);
+
+            // Actualiser l'affichage lors de la suppression de pièce
             gc.clearRect(1, 1, 699, 549);
             gc.strokeRect(0, 0, 700, 550);
 
-            this.niveau = niveaux.get(nv);
-            this.Appartement = niveau.getAppart();
-            this.appart = Appartement.get(a);
-            pieces = this.appart.getPieces();
-            p = pieces.size() + 1;
-
             for (Piece pieceE : pieces) {
-                //Permet d'obtenir les coins de la pièce
+                // Obtenir les coins de la pièce
                 ArrayList<Coin> coins = pieceE.getCoin();
                 int numCoins = coins.size();
                 if (numCoins > 1) {
@@ -163,103 +219,10 @@ public class Principal extends BorderPane {
                     gc.strokeLine(firstCoin.getX(), firstCoin.getY(), lastCoin.getX(), lastCoin.getY());
                 }
             }
-        });
-
-        Appartsuiv.setOnAction(event -> {
-            if (a != am - 1) {
-                a = a + 1;
-                this.label.setText("Niveau" + " " + nv + " " + "Appart" + " " + (a + 1));
-            }
-        });
-
-        Appartprec.setOnAction(event -> {
-            if (a != 0) {
-                a = a - 1;
-                this.label.setText("Niveau" + " " + nv + " " + "Appart" + " " + (a + 1));
-            }
-        });
-
-        Niveausuiv.setOnAction(event -> {
-            if (nv != nvm) {
-                nv = nv + 1;
-                this.a = 0;
-                this.label.setText("Niveau" + " " + nv + " " + "Appart" + " " + (a + 1));
-
-            }
-        });
-
-        Niveauprec.setOnAction(event -> {
-            if (nv != 0) {
-                nv = nv - 1;
-                this.a = 0;
-                this.label.setText("Niveau" + " " + nv + " " + "Appart" + " " + (a + 1));
-            }
-        });
-
-        Revet.setOnAction(event -> {
-            Devisrevet fenrevet = new Devisrevet(appart);
-        });
-
-       Devis.setOnAction(event -> {
-    couttot Deviss = new couttot(niveaux, "Ressources/Revetement.txt");
-});
-
-        save.setOnAction(event -> {
-            App main = new App();
-            main.save(bat);
-        });
-
-        valide.setOnAction(event -> {
-            this.niveau.addH(Double.parseDouble(hauteur.getText()));
-
-            // Actualiser l'affichage
-            gc.clearRect(1, 1, 699, 549);
-            gc.strokeRect(0, 0, 700, 550);
-
-            for (Piece pieceE : pieces) {
-                ArrayList<Coin> coins = pieceE.getCoin();
-                int numCoins = coins.size();
-                if (numCoins > 1) {
-                    for (int i = 0; i < numCoins - 1; i++) {
-                        Coin coin1 = coins.get(i);
-                        Coin coin2 = coins.get(i + 1);
-                        gc.strokeLine(coin1.getX(), coin1.getY(), coin2.getX(), coin2.getY());
-                    }
-                    Coin firstCoin = coins.get(0);
-                    Coin lastCoin = coins.get(numCoins - 1);
-                    gc.strokeLine(firstCoin.getX(), firstCoin.getY(), lastCoin.getX(), lastCoin.getY());
-                }           }
-        });
+        }
     }
-    
 
     public Canvas getCanvas() {
         return canvas;
-    }    
-   private void suppr() {
-    // Vérifier s'il y a des pièces à supprimer
-    if (!pieces.isEmpty()) {
-        // Supprimer la dernière pièce de la liste
-        pieces.remove(pieces.size() - 1);
-
-        // Actualiser l'affichage lors de la suppression de pièce
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(1, 1, 699, 549);
-        gc.strokeRect(0, 0, 700, 550);
-
-        for (Piece pieceE : pieces) {
-            // Obtenir les coins de la pièce
-            ArrayList<Coin> coins = pieceE.getCoin();
-            int numCoins = coins.size();
-            if (numCoins > 1) {
-                for (int i = 0; i < numCoins - 1; i++) {
-                    Coin coin1 = coins.get(i);
-                    Coin coin2 = coins.get(i + 1);
-                    gc.strokeLine(coin1.getX(), coin1.getY(), coin2.getX(), coin2.getY());
-                }
-                // Dessiner une ligne pour fermer la pièce
-                Coin firstCoin = coins.get(0);
-                Coin lastCoin = coins.get(numCoins - 1);
-                gc.strokeLine(firstCoin.getX(), firstCoin.getY(), lastCoin.getX(), lastCoin.getY());
-            }
-        }}}}
+    }
+}

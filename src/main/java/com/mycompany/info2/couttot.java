@@ -62,17 +62,17 @@ public class couttot extends BorderPane {
                 ArrayList<Piece> pieces = appartement.getPieces();
                 for (Piece piece : pieces) {
                     // Calculer le coût pour le sol
-                    Sol sol = piece.Getsol();
-                    coutTotal += lecteur.recupprix(sol.Rev()) * sol.surface();
+                    Sol sol = piece.getsol();
+                    coutTotal += lecteur.recupprix(sol.getRev()) * sol.surface();
 
                     // Calculer le coût pour le plafond
-                    Plafond plafond = piece.GetPlafond();
+                    Plafond plafond = piece.getPlafond();
                     coutTotal += lecteur.recupprix(plafond.getRev()) * plafond.surface();
 
                     // Calculer le coût pour chaque mur
                     ArrayList<Mur> murs = piece.getMur();
                     for (Mur mur : murs) {
-                        coutTotal += lecteur.recupprix(mur.getRev()) * mur.surface(niveau.geth());
+                        coutTotal += lecteur.recupprix(mur.getRev()) * mur.surface(niveau.getHauteurSousPlafond());
                     }
                 }
             }
