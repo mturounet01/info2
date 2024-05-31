@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Justin PRADIE
+ * @author maxt
  */
 public class Accueil extends VBox {
     
@@ -27,7 +27,7 @@ public class Accueil extends VBox {
     
     public Accueil (){
         
-        Text titleText = new Text("Batichoc");
+        Text titleText = new Text("DeviBat");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         
         Text descriptionText = new Text("Faire le devis de votre bâtiment");

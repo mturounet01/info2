@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
 public class Niveau {
     public int idNiveau;

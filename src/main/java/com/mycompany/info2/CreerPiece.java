@@ -40,7 +40,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 /**
  *
- * @author Emilien
+ * @author maxt
  */
 public class CreerPiece {
     public CreerPiece(int nv , int a ,Appartement appart,int p){

@@ -32,7 +32,7 @@ public class Plafond {
     }
     public int Revet(){
         System.out.println("Veuillez choisir le revetements associé à ce plafond");
-        //Cette partie va être a modifer lors du passage en JavaFX
+        
         int a=Lire.i();
         return a;
      }

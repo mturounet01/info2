@@ -24,9 +24,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 /**
  *
- * @author Emilien
+ * @author max
  */
-public class FenRevet {
+public class Devisrevet {
     
     private ArrayList<Piece> pieces = new ArrayList();
     private ArrayList<Mur> Mur = new ArrayList();
@@ -50,7 +50,7 @@ public class FenRevet {
     
    
     
-    public FenRevet (Appartement appart){
+    public Devisrevet (Appartement appart){
         Stage FenRevet = new Stage();
         pieces=appart.getPieces();
         
@@ -97,7 +97,7 @@ public class FenRevet {
                ComboBox<String> MurComboBox = new ComboBox<>();
                combo.add(MurComboBox);
                MurComboBox.setPromptText("Revetement");
-               MurComboBox.getItems().addAll("Peinture bas de Gamme","Peinture moyen de Gamme","Peinture haut de Gamme","Carrelage bas de Gamme","Carrelage haut de Gamme","Lambris bas de Gamme","Lambris Haut de Gamme","Marbre","Crepi","Papier Peint","Plaquettes de parement","Liege");
+               MurComboBox.getItems().addAll("Peinture bas de Gamme","Peinture moyen de Gamme","Peinture haut de Gamme","Carrelage bas de Gamme","Carrelage moyen de Gamme","Carrelage haut de Gamme","Lambris bas de Gamme","Lambris Haut de Gamme","Marbre","Crepi","Papier Peint","Plaquettes de parement","Liege");
                revet1.getChildren().addAll(label,MurComboBox);
                 } 
            }
@@ -114,40 +114,43 @@ public class FenRevet {
             
             switch (Combo.getValue()){
               case "Peinture bas de Gamme":
-                  Murtot.get(i).AddRev(1);
+                  Murtot.get(i).AddRev(125);
               break;
               case "Peinture moyen de Gamme":
-                   Murtot.get(i).AddRev(9);
+                   Murtot.get(i).AddRev(115);
               break;
                case "Peinture haut de Gamme":
                    Murtot.get(i).AddRev(8);
               break;
               case "Carrelage bas de Gamme":
-                   Murtot.get(i).AddRev(2);
+                   Murtot.get(i).AddRev(23);
+                   break;
+              case "Carrelage moyen de Gamme":
+                   Murtot.get(i).AddRev(23);
               break;
               case "Carrelage haut de Gamme":
-                   Murtot.get(i).AddRev(19);
+                   Murtot.get(i).AddRev(15);
               break;
               case "Lambris bas de Gamme":
-                  Murtot.get(i).AddRev(11);
+                  Murtot.get(i).AddRev(110);
               break;
               case "Lambris Haut de Gamme":
-                  Murtot.get(i).AddRev(3);
+                  Murtot.get(i).AddRev(43);
               break;
               case "Marbre":
-                  Murtot.get(i).AddRev(4);
+                  Murtot.get(i).AddRev(48);
               break;
               case "Crepi":
-                  Murtot.get(i).AddRev(5);
+                  Murtot.get(i).AddRev(105);
               break;
               case "Papier Peint":
-                   Murtot.get(i).AddRev(6);
+                   Murtot.get(i).AddRev(60);
               break;
               case "Plaquettes de parement":
-                  Murtot.get(i).AddRev(7);
+                  Murtot.get(i).AddRev(75);
               break;
               case "Liege":
-                  Murtot.get(i).AddRev(12);
+                  Murtot.get(i).AddRev(102);
               break;
              }i=i+1;
         
@@ -167,7 +170,7 @@ public class FenRevet {
               ComboBox<String> SolComboBox = new ComboBox<>();
               combos.add(SolComboBox);
               SolComboBox.setPromptText("Revetement");
-              SolComboBox.getItems().addAll("Carrelage bas de Gamme","Carrelage haut de Gamme","Lambris bas de Gamme","Lambris Haut de Gamme","Marbre","Liege bas de Gamme","Liege Haut de Gamme","Parquet","Vinyle Lino","Moquette","Stratifié","Gazon");
+              SolComboBox.getItems().addAll("Carrelage bas de Gamme","Carrelage moyen de Gamme","Carrelage haut de Gamme","Lambris bas de Gamme","Lambris Haut de Gamme","Marbre","Liege bas de Gamme","Liege Haut de Gamme","Parquet","Vinyle Lino","Moquette","Stratifié","Gazon");
               revet1.getChildren().addAll(label,SolComboBox);
          }
           revet1.getChildren().addAll(valider1);
@@ -181,40 +184,43 @@ public class FenRevet {
             }
             switch (Combo.getValue()){
               case "Carrelage bas de Gamme":
-                   soltot.get(i).AddRev(2);
+                   soltot.get(i).AddRev(115);
+              break;
+              case "Carrelage moyen de Gamme":
+                   soltot.get(i).AddRev(23);
               break;
               case "Carrelage haut de Gamme":
-                   soltot.get(i).AddRev(19);
+                   soltot.get(i).AddRev(15);
               break;
               case "Lambris bas de Gamme":
-                  soltot.get(i).AddRev(11);
+                  soltot.get(i).AddRev(110);
               break;
               case "Lambris Haut de Gamme":
-                  soltot.get(i).AddRev(3);
+                  soltot.get(i).AddRev(43);
               break;
               case "Marbre":
-                  soltot.get(i).AddRev(4);
+                  soltot.get(i).AddRev(48);
               break;
               case "Liege bas de Gamme":
-                  soltot.get(i).AddRev(12);
+                  soltot.get(i).AddRev(102);
               break;
               case "Liege Haut de Gamme":
-                   soltot.get(i).AddRev(18);
+                   soltot.get(i).AddRev(180);
               break;
               case "Parquet":
-                   soltot.get(i).AddRev(13);
+                   soltot.get(i).AddRev(132);
               break;
               case "Vinyle Lino":
-                   soltot.get(i).AddRev(14);
+                   soltot.get(i).AddRev(114);
               break;
               case "Moquette":
-                  soltot.get(i).AddRev(15);
+                  soltot.get(i).AddRev(156);
               break;
               case "Stratifié":
-                   soltot.get(i).AddRev(16);
+                   soltot.get(i).AddRev(1126);
               break;
                case "Gazon":
-                   soltot.get(i).AddRev(17);
+                   soltot.get(i).AddRev(174);
               break;
               }
             i=i+1;
@@ -237,7 +243,7 @@ public class FenRevet {
               ComboBox<String> PlafondComboBox = new ComboBox<>();
               combop.add(PlafondComboBox);
               PlafondComboBox.setPromptText("Revetement");
-              PlafondComboBox.getItems().addAll("Peinture bas de Gamme","Peinture moyen de Gamme","Peinture haut de Gamme","Papier Peint");
+              PlafondComboBox.getItems().addAll("Peinture bas de Gamme","Peinture moyen de Gamme","Peinture haut de Gamme","lambris");
               revet1.getChildren().addAll(label,PlafondComboBox);
          }
           revet1.getChildren().addAll(valider2);
@@ -251,22 +257,22 @@ public class FenRevet {
             }
              switch (Combo.getValue()){
               case "Peinture bas de Gamme":
-                  plafondtot.get(i).AddRev(1);
+                  plafondtot.get(i).AddRev(125);
               break;
               case "Peinture moyen de Gamme":
-                   plafondtot.get(i).AddRev(9);
+                   plafondtot.get(i).AddRev(19);
               break;
                case "Peinture haut de Gamme":
                    plafondtot.get(i).AddRev(8);
               break;
-              case "Papier Peint":
-                   plafondtot.get(i).AddRev(6);
+              case "lambris":
+                   plafondtot.get(i).AddRev(43);
               break;
         }
             i=i+1;
       }
       });
-      
+     
       
       
       close.setOnAction(event -> {

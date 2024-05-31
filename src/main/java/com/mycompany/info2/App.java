@@ -5,6 +5,7 @@
 package com.mycompany.info2;
 
 import fr.insa.projetinfo.*;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -93,16 +94,57 @@ public class App extends Application {
     }
 
     public void save(Batiment bat) {
-        try (BufferedWriter w = new BufferedWriter(new FileWriter("chemin_vers_votre_fichier.txt"))) {
-            // Écriture des données dans le fichier
-        } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Problème durant la sauvegarde");
-            alert.setContentText(ex.getLocalizedMessage());
-            alert.showAndWait();
+    try (BufferedWriter w = new BufferedWriter(new FileWriter("sauvegarde.txt"))) {
+        // Parcourir les niveaux du batiment
+        for (Niveau niveau : bat.getNiveau()) {
+            // Obtenir le nombre d'appartements pour ce niveau
+            int nbAppartements = niveau.getAppart().size();
+            // Écrire le nombre d'appartements dans le fichier
+            w.write("Niveau " + niveau.getIdNiveau() + ": " + nbAppartements + " appartements");
+            w.newLine();
+            
+            // Parcourir les appartements du niveau
+            for (Appartement appartement : niveau.getAppart()) {
+                // Obtenir le nombre de pièces pour cet appartement
+                int nbPieces = appartement.getPieces().size();
+                // Écrire le nombre de pièces dans le fichier
+                w.write("- Appartement " + appartement.getIdAppartement() + ": " + nbPieces + " pièces");
+                w.newLine();
+                
+                // Parcourir les pièces de l'appartement
+                for (Piece piece : appartement.getPieces()) {
+                    // Obtenir les revêtements de la pièce
+                    Sol sol = piece.Getsol();
+                    Plafond plafond = piece.GetPlafond();
+                    ArrayList<Mur> murs = piece.getMur();
+                    
+                    // Écrire les informations sur les revêtements dans le fichier
+                    w.write("  - Pièce " + piece.getIdPiece() + ":");
+                    w.newLine();
+                    w.write("    - Revêtement du sol: " + sol.Rev());
+                    w.newLine();
+                    w.write("    - Revêtement du plafond: " + plafond.getRev());
+                    w.newLine();
+                    w.write("    - Revêtements des murs:");
+                    w.newLine();
+                    
+                    // Parcourir les murs de la pièce
+                    for (Mur mur : murs) {
+                        w.write("      - Mur " + mur.getIdMur() + ": " + mur.getRev());
+                        w.newLine();
+                    }
+                }
+            }
         }
+    } catch (IOException ex) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText("Problème durant la sauvegarde");
+        alert.setContentText(ex.getLocalizedMessage());
+        alert.showAndWait();
     }
+}
+
 
     public static void main(String[] args) {
         launch();

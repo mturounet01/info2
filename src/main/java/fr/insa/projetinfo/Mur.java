@@ -10,7 +10,7 @@ import java.lang.Math;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
 public class Mur {
     int idMur;       //privé par défaut (on peut pas les utliser en dehors de cette classe)

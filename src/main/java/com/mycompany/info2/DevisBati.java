@@ -41,7 +41,7 @@ import javafx.scene.shape.Polygon;
 
 /**
  *
- * @author Justin PRADIE
+ * @author max
  */
 public class DevisBati extends BorderPane {
     

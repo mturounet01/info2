@@ -197,12 +197,12 @@ public class Principal extends BorderPane {
         });
 
         Revet.setOnAction(event -> {
-            FenRevet fenrevet = new FenRevet(appart);
+            Devisrevet fenrevet = new Devisrevet(appart);
         });
 
-        Devis.setOnAction(event -> {
-            Devis Deviss = new Devis(niveaux);
-        });
+       Devis.setOnAction(event -> {
+    couttot Deviss = new couttot(niveaux, "Ressources/Revetement.txt");
+});
 
         save.setOnAction(event -> {
             App main = new App();

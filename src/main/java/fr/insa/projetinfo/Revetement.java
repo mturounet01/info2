@@ -5,17 +5,60 @@
 package fr.insa.projetinfo;
 
 
-/**
- *
- * @author Justin PRADIE
- */
-public abstract class Revetement {
-    public int idRevetement;
-    public double prixunitaire;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
-    public Revetement(int idRevetement, double prixunitaire) {
-        this.idRevetement = idRevetement;
-        this.prixunitaire = prixunitaire;
+public class Revetement {
+    private int id;
+    private String nom;
+    private boolean mur;
+    private boolean sol;
+    private boolean plafond;
+    private double prix;
+
+    public Revetement(int id, String nom, boolean mur, boolean sol, boolean plafond, double prix) {
+        this.id = id;
+        this.nom = nom;
+        this.mur = mur;
+        this.sol = sol;
+        this.plafond = plafond;
+        this.prix = prix;
     }
-    public abstract double montant(Mur m);
+
+    public static ArrayList<Revetement> chargerRevetements(String fichierRevetements) throws IOException {
+        ArrayList<Revetement> revetements = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(fichierRevetements));
+        String ligne;
+        while ((ligne = reader.readLine()) != null) {
+            String[] parts = ligne.split(";");
+            int id = Integer.parseInt(parts[0]);
+            String nom = parts[1];
+            boolean mur = parts[2].equals("1");
+            boolean sol = parts[3].equals("1");
+            boolean plafond = parts[4].equals("1");
+            double prix = Double.parseDouble(parts[5]);
+            Revetement revetement = new Revetement(id, nom, mur, sol, plafond, prix);
+            revetements.add(revetement);
+        }
+        reader.close();
+        return revetements;
     }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public boolean isApplicableMur() {
+        return mur;
+    }
+
+    public boolean isApplicableSol() {
+        return sol;
+    }
+
+    public boolean isApplicablePlafond() {
+        return plafond;
+    }
+}
