@@ -33,7 +33,7 @@ public class Coin {
         return y;
     }
 
-    public void setIdCoin(int idCoin) {   //mettre à jour les valeurs
+    public void setIdCoin(int idCoin) {   
         this.idCoin = idCoin;
     }
 

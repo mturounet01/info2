@@ -69,12 +69,6 @@ public class Mur {
         revetements.add(revetement);
     }
     
-    public int Revet(){
-        System.out.println("Veuillez choisir le revetement associé à ce mur :");
-        // Cette partie va être à modifier lors du passage en JavaFX
-        int a = Lire.i(); // Je suppose que Lire.i() lit un entier depuis l'entrée standard
-        return a;
-    }
     
     
     public int getIdCoinDebut() {
