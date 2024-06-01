@@ -76,9 +76,6 @@ public class Mur {
         return a;
     }
     
-    public void save (Writer w) throws IOException {
-        w.append("Mur;" + idMur + ";" + this.debut.getIdCoin() + ";" + this.fin.getIdCoin() + ";" + this.idRev + ";\n");
-    }
     
     public int getIdCoinDebut() {
         return this.debut.getIdCoin();

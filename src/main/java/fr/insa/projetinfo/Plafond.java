@@ -64,13 +64,5 @@ public class Plafond {
         return coins;
     }
 
-    public void save(Writer w) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Plafond;").append(idPlafond).append(";");
-        for (Coin coin : coins) {
-            sb.append(coin.getIdCoin()).append(";");
-        }
-        sb.append(rev).append(";\n");
-        w.append(sb.toString());
-    }
+    
 }

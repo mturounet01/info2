@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoine
  */
 import java.io.IOException;
 import java.io.Writer;
@@ -43,11 +43,5 @@ public class Batiment {
     }
     
 
-    public void save(Writer w) throws IOException {
-        w.append("batiment;" + nomBat + ";");
-        for (Niveau niveau : niveaux) {
-            w.append(niveau.getIdNiveau() + ";");
-        }
-        w.append("\n");
-    }
+   
     }

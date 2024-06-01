@@ -6,7 +6,7 @@ package com.mycompany.info2;
 
 /**
  *
- * @author turou
+ * @author maxt
  */
 import fr.insa.projetinfo.Batiment;
 import fr.insa.projetinfo.Niveau;

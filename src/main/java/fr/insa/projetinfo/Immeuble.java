@@ -6,7 +6,7 @@ package fr.insa.projetinfo;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
 public class Immeuble {
     public int idImmeuble;

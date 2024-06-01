@@ -15,6 +15,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+/**
+ *
+ * @author maxt
+ */
 
 public class App extends Application {
 
@@ -23,7 +27,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Accueil accueil = new Accueil(primaryStage);
+        FenAccueil accueil = new FenAccueil(primaryStage);
 
         Scene scene = new Scene(accueil, 800, 200);
         primaryStage.setTitle("Principal");
@@ -40,7 +44,7 @@ public class App extends Application {
     }
 
     private void showChoix(Stage primaryStage) {
-        Choix choix = new Choix();
+        FenChoix choix = new FenChoix();
 
         Scene scene2 = new Scene(choix, 800, 400);
         primaryStage.setScene(scene2);
@@ -88,7 +92,7 @@ public class App extends Application {
 
     private void ShowPrincipal(Stage primaryStage, Batiment bat) {
         this.niveaux = bat.getNiveau();
-        Principal principal = new Principal(this.niveaux, bat);
+        FenPrincipal principal = new FenPrincipal(this.niveaux, bat);
         Scene scene3 = new Scene(principal, 900, 650);
         primaryStage.setScene(scene3);
     }

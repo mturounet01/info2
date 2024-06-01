@@ -64,14 +64,5 @@ public class Sol {
         return coins;
     }
 
-    public void save(Writer w) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Sol;");
-        sb.append(idSol).append(";");
-        for (Coin coin : coins) {
-            sb.append(coin.getIdCoin()).append(";");
-        }
-        sb.append(rev).append(";\n");
-        w.append(sb.toString());
-    }
+   
 }

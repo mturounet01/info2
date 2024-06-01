@@ -18,15 +18,6 @@ public class Maison {
         this.idMaison = idMaison;
         
     }
-   // private double surface(){
-       // double hsp;
-        //hsp = Lire.d();
-        //return hsp*this.longueur();
-    public double surface(){
-        
-        return 0;
-        
-    }
     public void afficher(){
         System.out.println("Maison" + idMaison );
       //for (Niveau niveau : niveau){

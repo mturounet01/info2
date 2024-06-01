@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoine
  */
 public class Appartement {
     public int idAppartement;
@@ -43,13 +43,7 @@ public class Appartement {
     }
     
     
-    public void save (Writer w) throws IOException {
-        w.append("Appartement;"+idAppartement+";"+idNiveau+";");
-        for (Piece piece : pieces){
-             w.append(piece.getIdPiece()+";");
-        }
-        w.append(""+"\n");
-    }
+    
     
 }
     

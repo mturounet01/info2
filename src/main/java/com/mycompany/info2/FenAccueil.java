@@ -28,12 +28,12 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Accueil extends VBox {
+public class FenAccueil extends VBox {
 
     private Button createProjectButton;
     private Button openProjectButton;
 
-    public Accueil(Stage primaryStage) {
+    public FenAccueil(Stage primaryStage) {
 
         Text titleText = new Text("DeviBat");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 24));

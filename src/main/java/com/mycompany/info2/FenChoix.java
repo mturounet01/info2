@@ -20,9 +20,9 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Justin PRADIE
+ * @author maxt
  */
-public class Choix extends VBox {
+public class FenChoix extends VBox {
     public Button boutonvalide;
     public CheckBox maisonCheckBox;
     public ComboBox niveauComboBox;
@@ -32,7 +32,7 @@ public class Choix extends VBox {
     public CheckBox ImmeubleCheckBox;
     private TextField hauteur ;
     
-    public Choix(){
+    public FenChoix(){
         // Création des éléments graphiques
         Label titleLabel = new Label("Veuillez saisir le titre de votre projet:");
         TextField Titre = new TextField();

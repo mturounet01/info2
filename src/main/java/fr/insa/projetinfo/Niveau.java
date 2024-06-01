@@ -42,13 +42,7 @@ public class Niveau {
         return this.hauteurSousPlafond;
     }
 
-    public void save(Writer w) throws IOException {
-        w.append("Niveau;" + idNiveau + ";" + hauteurSousPlafond + ";");
-        for (Appartement appartement : appartements) {
-            w.append(appartement.getIdAppartement() + ";");
-        }
-        w.append("\n");
-    }
+    
 
     public void addHauteurSousPlafond(double hauteur) {
         this.hauteurSousPlafond = hauteur;

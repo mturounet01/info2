@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.Writer;
 /**
  *
- * @author Justin PRADIE
+ * @author antoinez
  */
 public class Coin {
-    public int idCoin;      //privé par défaut (on peut pas les utliser en dehors de cette classe)
-    public double x;        //peut-être enlever les public du coup
+    public int idCoin;      
+    public double x;        
     public double y;
     
     public Coin (int idCoin, double x, double y){
@@ -44,16 +44,11 @@ public class Coin {
     public void setY(double y) {
         this.y = y;
     }
-    public void dessiner(){}   
-
     
     @Override
     public String toString() {
         return "Coin{" + "idCoin=" + idCoin + ", x=" + x + ", y=" + y + '}';
     }
-    public void save (Writer w) throws IOException {
-        w.append("Coin;"+idCoin+";"+this.x+";"+this.y+";"+ "\n");
-
-    }
+    
 
 }

@@ -15,8 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+/**
+ *
+ * @author maxt
+ */
 
-public class Devisrevet {
+public class FenDevisrevet {
 
     private ArrayList<Piece> pieces;
     private ArrayList<Mur> murs;
@@ -30,7 +34,7 @@ public class Devisrevet {
     private Button validerMur, validerSol, validerPlafond, closeButton;
     private VBox optionsContainer;
 
-    public Devisrevet(Appartement appart) {
+    public FenDevisrevet(Appartement appart) {
         Stage fenRevet = new Stage();
 
         pieces = appart.getPieces();
@@ -106,7 +110,7 @@ public class Devisrevet {
             "Peinture bas de Gamme", "Peinture moyen de Gamme", "Peinture haut de Gamme",
             "Carrelage bas de Gamme", "Carrelage moyen de Gamme", "Carrelage haut de Gamme",
             "Lambris bas de Gamme", "Lambris Haut de Gamme", "Marbre", "Crepi",
-            "Papier Peint", "Plaquettes de parement", "Liege"
+            "Papier Peint", "Plaquettes de parement","liege"
         );
         return comboBox;
     }
@@ -125,13 +129,13 @@ public class Devisrevet {
                     mur.addRev(125);
                     break;
                 case "Peinture moyen de Gamme":
-                    mur.addRev(115);
+                    mur.addRev(19);
                     break;
                 case "Peinture haut de Gamme":
                     mur.addRev(8);
                     break;
                 case "Carrelage bas de Gamme":
-                    mur.addRev(23);
+                    mur.addRev(115);
                     break;
                 case "Carrelage moyen de Gamme":
                     mur.addRev(23);
@@ -157,9 +161,10 @@ public class Devisrevet {
                 case "Plaquettes de parement":
                     mur.addRev(75);
                     break;
-                case "Liege":
+                    case "Liege":
                     mur.addRev(102);
                     break;
+                
             }
         }
     }
@@ -188,8 +193,8 @@ public class Devisrevet {
         comboBox.setPromptText("Revetement");
         comboBox.getItems().addAll(
             "Carrelage bas de Gamme", "Carrelage moyen de Gamme", "Carrelage haut de Gamme",
-            "Lambris bas de Gamme", "Lambris Haut de Gamme", "Marbre",
-            "Liege bas de Gamme", "Liege Haut de Gamme", "Parquet",
+            "Lambris bas de Gamme", "Lambris Haut de Gamme", "Marbre"
+           , "Liege ", "Parquet",
             "Vinyle Lino", "Moquette", "Stratifié", "Gazon"
         );
         return comboBox;
@@ -223,10 +228,7 @@ public class Devisrevet {
                 case "Marbre":
                     sol.addRev(48);
                     break;
-                case "Liege bas de Gamme":
-                    sol.addRev(102);
-                    break;
-                case "Liege Haut de Gamme":
+                case "Liege ":
                     sol.addRev(180);
                     break;
                 case "Parquet":

@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class Principal extends BorderPane {
+public class FenPrincipal extends BorderPane {
 
     private Label label;
     private Button addPieceButton, supprButton, saveButton, devisButton, revetButton, actualiserButton;
@@ -34,7 +34,7 @@ public class Principal extends BorderPane {
     private ArrayList<Piece> pieces;
     private int nv = 0, a = 0, p, am, nvm;
 
-    public Principal(ArrayList<Niveau> niveaux, Batiment bat) {
+    public FenPrincipal(ArrayList<Niveau> niveaux, Batiment bat) {
         this.niveaux = niveaux;
         this.bat = bat;
 
@@ -119,7 +119,7 @@ public class Principal extends BorderPane {
     }
 
     private void addPiece() {
-        new CreerPiece(nv, a, appart, p);
+        new FenCreerPiece(nv, a, appart, p);
     }
 
     private void actualiser() {
@@ -176,7 +176,7 @@ public class Principal extends BorderPane {
     }
 
     private void openRevetement() {
-        new Devisrevet(appart);
+        new FenDevisrevet(appart);
     }
 
     private void openDevis() {

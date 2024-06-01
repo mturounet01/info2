@@ -41,9 +41,9 @@ import javafx.scene.shape.Polygon;
 
 /**
  *
- * @author max
+ * @author maxt
  */
-public class DevisBati extends BorderPane {
+public class DessinBat extends BorderPane {
     
     public  double rayonPoint = 5;
     public  double epaisseurTrait = 2;
@@ -59,20 +59,10 @@ public class DevisBati extends BorderPane {
     private ObservableList<Node> children;
     //private HashMap<Node, Piece> pieces;
     private Object pieces;
-    private DevisBati CeDevis;
+    private DessinBat CeDevis;
   
       
-     public DevisBati(){
-       
-        Button btnAjouterPiece = new Button("Ajouter une pièce");
-       
-        
-        Button save = new Button("Enregistrer");
-        
-        Button Rev = new Button("Revetement");
-      
-        
-        Button Devis = new Button("Devis");
+     public DessinBat(){
        
         
         // Création du Canvas

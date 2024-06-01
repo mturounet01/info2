@@ -45,9 +45,7 @@ public class Piece {
     public int getIdPiece(){
         return this.idPiece;
     }
-    public void save (Writer w) throws IOException {
-    w.append("Piece;"+idPiece+";"+this.sol.getIdSol()+";"+this.plafond.getIdPlafond()+";"+this.Mur.get(0).getIdMur()+";"+this.Mur.get(1).getIdMur()+";"+this.Mur.get(2).getIdMur()+";"+this.Mur.get(3).getIdMur()+";"+ "\n");
-    }
+   
     public Sol getsol (){
     return this.sol;
     }

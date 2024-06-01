@@ -42,8 +42,8 @@ import javafx.scene.shape.Polygon;
  *
  * @author maxt
  */
-public class CreerPiece {
-    public CreerPiece(int nv , int a ,Appartement appart,int p){
+public class FenCreerPiece {
+    public FenCreerPiece(int nv , int a ,Appartement appart,int p){
      
         Stage CreerPiece = new Stage();
         Label X = new Label("Coord X coin haut gauche");
