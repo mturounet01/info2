@@ -180,7 +180,7 @@ public class FenPrincipal extends BorderPane {
     }
 
     private void openDevis() {
-        new couttot(niveaux, "Ressources/Revetement.txt");
+        new CoutTot(niveaux, "Ressources/Revetement.txt");
     }
 
     private void saveProject() {
