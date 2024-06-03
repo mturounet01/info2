@@ -7,18 +7,18 @@ package fr.insa.projetinfo;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.Writer;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
 /**
  *
  * @author antoinez
  */
-import java.util.ArrayList;
-import java.io.IOException;
-import java.io.Writer;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
 
 public class Plafond {
     private int idPlafond;

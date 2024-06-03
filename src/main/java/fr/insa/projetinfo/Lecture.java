@@ -8,7 +8,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**s
+ *
+ * @author maxt
+ */
 public class Lecture {
     private double a = 1.1;
     private String re;

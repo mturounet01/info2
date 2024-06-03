@@ -4,7 +4,14 @@
  */
 package com.mycompany.info2;
 
-import fr.insa.projetinfo.*;
+
+
+import fr.insa.projetinfo.Appartement;
+import fr.insa.projetinfo.Batiment;
+import fr.insa.projetinfo.Coin;
+import fr.insa.projetinfo.Mur;
+import fr.insa.projetinfo.Niveau;
+import fr.insa.projetinfo.Piece;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,15 +20,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
+/**
+ *
+ * @author maxt
+ */
 
 public class FenPrincipal extends BorderPane {
 
     private Label label;
     private Button addPieceButton, supprButton, saveButton, devisButton, revetButton, actualiserButton;
     private Button appartsuivButton, appartprecButton, niveausuivButton, niveauprecButton, valideButton;
+    private Button addPorteButton, addFenetreButton; // Nouveaux boutons
     private TextField hauteurField;
     private Canvas canvas;
     private GraphicsContext gc;
@@ -29,8 +39,8 @@ public class FenPrincipal extends BorderPane {
     private ArrayList<Niveau> niveaux;
     private Batiment bat;
     private Niveau niveau;
-    private Appartement appart;
     private ArrayList<Appartement> appartements;
+    private Appartement appart;
     private ArrayList<Piece> pieces;
     private int nv = 0, a = 0, p, am, nvm;
 
@@ -59,35 +69,38 @@ public class FenPrincipal extends BorderPane {
         hauteurField = new TextField("Donnez hauteur");
         valideButton = new Button("Valide hauteur");
 
+        // Initialisation des nouveaux boutons
+        addPorteButton = new Button("Ajouter une porte");
+        addFenetreButton = new Button("Ajouter une fenêtre");
+
         canvas = new Canvas(700, 550);
         gc = canvas.getGraphicsContext2D();
     }
 
     private void configureLayout() {
-    VBox vbox = new VBox(10);
-    vbox.setPadding(new Insets(10));
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(10));
 
-    // Ajout des boutons et autres éléments au VBox
-    vbox.getChildren().addAll(
-        label, addPieceButton, supprButton, saveButton, revetButton,
-        devisButton, actualiserButton, niveausuivButton, appartsuivButton,
-        appartprecButton, niveauprecButton, hauteurField, valideButton
-    );
+        // Ajout des boutons et autres éléments au VBox
+        vbox.getChildren().addAll(
+                label, addPieceButton, supprButton, saveButton, revetButton,
+                devisButton, actualiserButton, niveausuivButton, appartsuivButton,
+                appartprecButton, niveauprecButton, hauteurField, valideButton,
+                addPorteButton, addFenetreButton // Ajout des nouveaux boutons
+        );
 
-    // Positionnement du VBox sur le côté droit
-    setRight(vbox);
+        // Positionnement du VBox sur le côté droit
+        setRight(vbox);
 
-    // Positionnement du canvas au centre
-    setCenter(canvas);
+        // Positionnement du canvas au centre
+        setCenter(canvas);
 
-    // Ajout d'un label en bas
-    setBottom(new Label("Echelle: 100p = 1m"));
+        // Ajout d'un label en bas
+        setBottom(new Label("Echelle: 100p = 1m"));
 
-    // Dessin d'un rectangle sur le canvas pour délimiter une zone spécifique
-    gc.strokeRect(0, 0, 700, 550);
-}
-
-
+        // Dessin d'un rectangle sur le canvas pour délimiter une zone spécifique
+        gc.strokeRect(0, 0, 700, 550);
+    }
 
     private void addEventHandlers() {
         addPieceButton.setOnAction(event -> addPiece());
@@ -101,6 +114,10 @@ public class FenPrincipal extends BorderPane {
         devisButton.setOnAction(event -> openDevis());
         saveButton.setOnAction(event -> saveProject());
         valideButton.setOnAction(event -> validateHeight());
+
+        // Gestionnaires d'événements pour les nouveaux boutons
+        addPorteButton.setOnAction(event -> addPorte());
+        addFenetreButton.setOnAction(event -> addFenetre());
     }
 
     private void updateState() {
@@ -220,6 +237,30 @@ public class FenPrincipal extends BorderPane {
                 }
             }
         }
+    }
+
+    private void addPorte() {
+        
+        if (!pieces.isEmpty()) {
+            Piece piece = pieces.get(pieces.size() - 1); 
+            if (!piece.getMur().isEmpty()) {
+                Mur mur = piece.getMur().get(0); 
+                mur.setNbPortes(mur.getNbPortes() + 1);
+            }
+        }
+        actualiser();
+    }
+
+    private void addFenetre() {
+        
+        if (!pieces.isEmpty()) {
+            Piece piece = pieces.get(pieces.size() - 1); 
+            if (!piece.getMur().isEmpty()) {
+                Mur mur = piece.getMur().get(0); 
+                mur.setNbFenetres(mur.getNbFenetres() + 1);
+            }
+        }
+        actualiser();
     }
 
     public Canvas getCanvas() {

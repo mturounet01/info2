@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 
-/**s
+/**
  *
  * @author antoinez
  */

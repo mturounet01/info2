@@ -49,7 +49,7 @@ public class DessinBat extends BorderPane {
     public  double epaisseurTrait = 2;
     
     private  double pixelsParMetre = 25;
-    private Point2D origine;//coos de l'origine reelle en coos ecran 
+    private Point2D origine;
     private Point2D initPos;
     private Point2D origineInitPos;
     private Point2D prevPos;
@@ -57,9 +57,8 @@ public class DessinBat extends BorderPane {
     private double maxX = 512;
     private double maxY = 512;
     private ObservableList<Node> children;
-    //private HashMap<Node, Piece> pieces;
-    private Object pieces;
-    private DessinBat CeDevis;
+    
+    
   
       
      public DessinBat(){

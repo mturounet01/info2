@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Justin PRADIE
+ * @author antoine
  */
 public class Maison {
     public int idMaison;

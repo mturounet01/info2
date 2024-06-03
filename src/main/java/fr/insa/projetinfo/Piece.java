@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.concurrent.atomic.AtomicInteger;
 /**
  *
- * @author Justin PRADIE
+ * @author antoine
  */
 public class Piece {
     private static final AtomicInteger idCounter = new AtomicInteger(0);

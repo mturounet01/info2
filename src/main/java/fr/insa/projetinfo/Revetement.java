@@ -10,6 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ *
+ * @author antoinez
+ */
 
 public class Revetement {
     private final int id;
@@ -72,19 +76,6 @@ public class Revetement {
     public double getPrix() {
         return prix;
     }
-
-    public boolean isApplicableMur() {
-        return mur;
-    }
-
-    public boolean isApplicableSol() {
-        return sol;
-    }
-
-    public boolean isApplicablePlafond() {
-        return plafond;
-    }
-
     public String getType() {
         return type;
     }

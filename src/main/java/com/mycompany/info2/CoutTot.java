@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.info2;
-
+import fr.insa.projetinfo.Mur;
 import fr.insa.projetinfo.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import java.io.*;
 import java.util.*;
+
 /**
  *
  * @author antoine
@@ -73,7 +74,10 @@ public class CoutTot extends BorderPane {
                     ArrayList<Mur> murs = piece.getMur();
                     for (Mur mur : murs) {
                         coutTotal += lecteur.recupprix(mur.getRev()) * mur.surface(niveau.getHauteurSousPlafond());
+                        coutTotal += mur.getNbPortes() * Mur.PRIX_PORTE;
+                        coutTotal += mur.getNbFenetres() * Mur.PRIX_FENETRE;
                     }
+                    
                 }
             }
         }
